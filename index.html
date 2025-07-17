@@ -2,69 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trip Cost Estimator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 8px;
-      margin-top: 6px;
-      font-size: 16px;
-    }
-    #durationResult, #apiResult {
-      margin-top: 20px;
-      font-weight: bold;
-      color: #333;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Trip Cost Estimator</h2>
+<header>
+  Saman
+</header>
 
-<form id="tripForm">
-  <label>Adults:</label>
-  <input type="number" name="adults" min="1" required>
+<main>
+  <form id="tripForm">
+    <label>Adults:</label>
+    <input type="number" name="adults" min="1" required>
 
-  <label>Children:</label>
-  <input type="number" name="children" min="0" required>
+    <label>Children:</label>
+    <input type="number" name="children" min="0" required>
 
-  <label>Hotel Type:</label>
-  <select name="hotel" required>
-    <option value="1">1 Star</option>
-    <option value="2">2 Star</option>
-    <option value="3">3 Star</option>
-    <option value="4">4 Star</option>
-    <option value="5">5 Star</option>
-  </select>
+    <label>Hotel Type:</label>
+    <select name="hotel" required>
+      <option value="1">1 Star</option>
+      <option value="2">2 Star</option>
+      <option value="3">3 Star</option>
+      <option value="4">4 Star</option>
+      <option value="5">5 Star</option>
+    </select>
 
-  <label>Destination:</label>
-  <input type="text" name="destination" required>
+    <label>Destination:</label>
+    <input type="text" name="destination" required>
 
-  <label>Start Date & Time:</label>
-  <input type="datetime-local" name="startDateTime" required>
+    <label>Start Date & Time:</label>
+    <input type="datetime-local" name="startDateTime" required>
 
-  <label>End Date & Time:</label>
-  <input type="datetime-local" name="endDateTime" required>
+    <label>End Date & Time:</label>
+    <input type="datetime-local" name="endDateTime" required>
 
-  <button type="submit">Calculate Trip Cost</button>
-  <button type="reset">Reset</button>
-</form>
+    <button type="submit">Calculate Trip Cost</button>
+    <button type="reset">Reset</button>
 
-<p id="durationResult"></p>
-<p id="apiResult"></p>
+    <p id="durationResult"></p>
+    <p id="apiResult"></p>
+  </form>
+</main>
+
+<footer>
+  &copy; 2025 Trip Cost Estimator by Saman. All rights reserved.
+</footer>
 
 <script src="script.js"></script>
 </body>
