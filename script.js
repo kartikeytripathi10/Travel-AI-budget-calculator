@@ -59,7 +59,7 @@ Total: ₹xxxx - ₹xxxx
 To travel to ${destination}, ₹xxxx should be your estimated budget.
 `;
 
-  const API_KEY = 'YOUR_API_KEY_HERE';
+  const API_KEY = 'AIzaSyDJ_yCsvL7_QW22Uxy1XA8X7mzyGoh8vp8';
   const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
   try {
