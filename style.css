@@ -80,6 +80,23 @@ form select:focus {
   box-shadow: 0 0 5px #333;
 }
 
+.inline-fields {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.inline-fields .field-group {
+  flex: 1;
+  min-width: 120px;
+}
+
+.inline-fields label {
+  margin-top: 0;
+}
+
+
 button {
   width: 100%;
   padding: 12px;

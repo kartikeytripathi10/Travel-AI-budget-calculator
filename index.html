@@ -14,11 +14,16 @@
 
 <main>
   <form id="tripForm">
-    <label>Adults:</label>
+    <div class="inline-fields">
+  <div class="field-group">
+    <label for="adults">Adults:</label>
     <input type="number" name="adults" min="1" required>
-
-    <label>Children:</label>
+  </div>
+  <div class="field-group">
+    <label for="children">Children:</label>
     <input type="number" name="children" min="0" required>
+  </div>
+</div>
 
     <label>Hotel Type:</label>
     <select name="hotel" required>
