@@ -9,50 +9,57 @@
 <body>
 
 <header>
-  Saman
+  <div class="logo">Saman<span>.</span></div>
 </header>
 
 <main>
   <form id="tripForm">
-    <div class="inline-fields">
-  <div class="field-group">
-    <label for="adults">Adults:</label>
-    <input type="number" name="adults" min="1" required>
-  </div>
-  <div class="field-group">
-    <label for="children">Children:</label>
-    <input type="number" name="children" min="0" required>
-  </div>
-</div>
+    <h2>Plan Your Trip</h2>
 
-    <label>Hotel Type:</label>
-    <select name="hotel" required>
-      <option value="1">1 Star</option>
-      <option value="2">2 Star</option>
-      <option value="3">3 Star</option>
-      <option value="4">4 Star</option>
-      <option value="5">5 Star</option>
-    </select>
+    <div class="form-grid">
+      <div class="form-field">
+        <input type="number" name="adults" required>
+        <label>Adults</label>
+      </div>
+      <div class="form-field">
+        <input type="number" name="children" required>
+        <label>Children</label>
+      </div>
+      <div class="form-field full">
+        <select name="hotel" required>
+          <option value="">Select Hotel Type</option>
+          <option value="1">1 Star</option>
+          <option value="2">2 Star</option>
+          <option value="3">3 Star</option>
+          <option value="4">4 Star</option>
+          <option value="5">5 Star</option>
+        </select>
+        <label class="floating-label">Hotel Type</label>
+      </div>
+      <div class="form-field full">
+        <input type="text" name="destination" required>
+        <label>Destination</label>
+      </div>
+      <div class="form-field">
+        <input type="datetime-local" name="startDateTime" required>
+        <label class="floating-label">Start Date</label>
+      </div>
+      <div class="form-field">
+        <input type="datetime-local" name="endDateTime" required>
+        <label class="floating-label">End Date</label>
+      </div>
+    </div>
 
-    <label>Destination:</label>
-    <input type="text" name="destination" required>
-
-    <label>Start Date & Time:</label>
-    <input type="datetime-local" name="startDateTime" required>
-
-    <label>End Date & Time:</label>
-    <input type="datetime-local" name="endDateTime" required>
-
-    <button type="submit">Calculate Trip Cost</button>
+    <button type="submit">Calculate Cost</button>
     <button type="reset">Reset</button>
 
-    <p id="durationResult"></p>
-    <p id="apiResult"></p>
+    <div id="durationResult"></div>
+    <div id="apiResult"></div>
   </form>
 </main>
 
 <footer>
-  &copy; 2025 Trip Cost Estimator by Saman. All rights reserved.
+  &copy; 2025 Saman • Trip Cost Estimator
 </footer>
 
 <script src="script.js"></script>
