@@ -2,20 +2,23 @@ document.getElementById("tripForm").addEventListener("submit", async function (e
   e.preventDefault();
 
   const form = e.target;
-  const adults = form.adults.value;
-  const children = form.children.value;
+  const adults = parseInt(form.adults.value, 10);
+  const children = parseInt(form.children.value, 10);
   const hotel = form.hotel.value;
   const destination = form.destination.value;
   const startDate = new Date(form.startDateTime.value);
   const endDate = new Date(form.endDateTime.value);
 
   const duration = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+
   if (duration <= 0) {
-    document.getElementById("durationResult").textContent = "End date must be after start date.";
+    document.getElementById("durationResult").textContent = "❌ End date must be after start date.";
+    document.getElementById("apiResult").textContent = "";
     return;
   }
 
-  document.getElementById("durationResult").textContent = `Trip Duration: ${duration} day(s)`;
+  document.getElementById("durationResult").textContent = `✅ Trip Duration: ${duration} day(s)`;
+  document.getElementById("apiResult").textContent = "⏳ Calculating... Please wait...";
 
   const prompt = `
 A user is planning a trip.
@@ -34,12 +37,13 @@ Calculate estimated budget including:
 4. Total estimated cost range.
 
 Reply in this format:
-place : ${destination}
-accommodation(on the basis of ${hotel} star hotel) : ₹xxxx - ₹xxxx
-transportation : ₹xxxx - ₹xxxx
-Meats : ₹xxxx - ₹xxxx
-Total : ₹xxxx - ₹xxxx
-To travel to ${destination}, ₹xxxx should be your budget.
+Place: ${destination}
+Accommodation (based on ${hotel}-star hotel): ₹xxxx - ₹xxxx
+Transportation: ₹xxxx - ₹xxxx
+Meals: ₹xxxx - ₹xxxx
+Total: ₹xxxx - ₹xxxx
+
+To travel to ${destination}, ₹xxxx should be your estimated budget.
 `;
 
   const API_KEY = 'AIzaSyDJ_yCsvL7_QW22Uxy1XA8X7mzyGoh8vp8';
@@ -47,30 +51,28 @@ To travel to ${destination}, ₹xxxx should be your budget.
 
   try {
     const response = await fetch(GEMINI_URL, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  contents: [
-    {
-      role: "user",
-      parts: [
-        { text: prompt }
-      ]
-    }
-  ]
-})
-});
-
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: "user",
+            parts: [
+              { text: prompt }
+            ]
+          }
+        ]
+      })
+    });
 
     const data = await response.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Failed to generate result.";
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "❌ Failed to generate result.";
 
-    document.getElementById("apiResult").innerHTML = `<pre>${reply}</pre>`;
-
+    document.getElementById("apiResult").innerHTML = `<div style="white-space: pre-wrap; color: #2c3e50;">${reply}</div>`;
   } catch (error) {
     console.error("API Error:", error);
-    document.getElementById("apiResult").textContent = "An error occurred while calculating trip cost.";
+    document.getElementById("apiResult").textContent = "❌ An error occurred while calculating the trip cost.";
   }
 });
