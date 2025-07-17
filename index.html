@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trip Cost Estimator</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
 </head>
 <body>
 
@@ -25,6 +29,7 @@
         <input type="number" name="children" required>
         <label>Children</label>
       </div>
+
       <div class="form-field full">
         <select name="hotel" required>
           <option value="">Select Hotel Type</option>
@@ -36,17 +41,15 @@
         </select>
         <label class="floating-label">Hotel Type</label>
       </div>
+
       <div class="form-field full">
         <input type="text" name="destination" required>
         <label>Destination</label>
       </div>
-      <div class="form-field">
-        <input type="datetime-local" name="startDateTime" required>
-        <label class="floating-label">Start Date</label>
-      </div>
-      <div class="form-field">
-        <input type="datetime-local" name="endDateTime" required>
-        <label class="floating-label">End Date</label>
+
+      <div class="form-field full">
+        <input type="text" id="tripDateRange" name="tripDateRange" placeholder="Select Date & Time Range" required>
+        <label class="floating-label">Trip Dates</label>
       </div>
     </div>
 
@@ -62,6 +65,7 @@
   &copy; 2025 Saman • Trip Cost Estimator
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="script.js"></script>
 </body>
 </html>
