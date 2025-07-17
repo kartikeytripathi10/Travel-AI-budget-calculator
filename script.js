@@ -1,3 +1,11 @@
+flatpickr("#tripDateRange", {
+  mode: "range",
+  enableTime: true,
+  dateFormat: "Y-m-d H:i",
+  time_24hr: true,
+  minDate: "today"
+});
+
 document.getElementById("tripForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -6,14 +14,19 @@ document.getElementById("tripForm").addEventListener("submit", async function (e
   const children = parseInt(form.children.value, 10);
   const hotel = form.hotel.value;
   const destination = form.destination.value;
-  const startDate = new Date(form.startDateTime.value);
-  const endDate = new Date(form.endDateTime.value);
+
+  const dateRange = form.tripDateRange.value.split(" to ");
+  if (dateRange.length < 2) {
+    document.getElementById("durationResult").textContent = "❌ Please select a valid date range.";
+    return;
+  }
+
+  const startDate = new Date(dateRange[0]);
+  const endDate = new Date(dateRange[1]);
 
   const duration = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
-
   if (duration <= 0) {
     document.getElementById("durationResult").textContent = "❌ End date must be after start date.";
-    document.getElementById("apiResult").textContent = "";
     return;
   }
 
@@ -46,30 +59,22 @@ Total: ₹xxxx - ₹xxxx
 To travel to ${destination}, ₹xxxx should be your estimated budget.
 `;
 
-  const API_KEY = 'AIzaSyDJ_yCsvL7_QW22Uxy1XA8X7mzyGoh8vp8';
-  const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + API_KEY;
+  const API_KEY = 'YOUR_API_KEY_HERE';
+  const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
   try {
     const response = await fetch(GEMINI_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [
-          {
-            role: "user",
-            parts: [
-              { text: prompt }
-            ]
-          }
+          { role: "user", parts: [ { text: prompt } ] }
         ]
       })
     });
 
     const data = await response.json();
     const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "❌ Failed to generate result.";
-
     document.getElementById("apiResult").innerHTML = `<div style="white-space: pre-wrap; color: #2c3e50;">${reply}</div>`;
   } catch (error) {
     console.error("API Error:", error);
